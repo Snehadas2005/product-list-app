@@ -1,59 +1,88 @@
 import React, { useState, useEffect } from 'react';
 import { Search, ShoppingBag, DollarSign } from 'lucide-react';
 
+import blackDress from './images/black-slatin.jpg';
+import bootsBlack from './images/boots-3-black.jpg';
+import blueDress from './images/dress-blue.jpg';
+import blackHeels from './images/heels-6-black.jpg';
+import maroonDress from './images/maroon-slatin.jpg';
+import pendantPink from './images/pendant-7-dark-pink.jpg';
+import blackTop from './images/tops-black.jpg';
+import blackBag from './images/bag-9-black.jpg';
+
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Hardcoded products as fallback
   const fallbackProducts = [
     {
       id: 1,
-      title: "Wireless Bluetooth Headphones",
-      description: "High-quality wireless headphones with noise cancellation and 30-hour battery life.",
-      price: 79.99,
-      category: "Electronics"
+      title: "Elegant Black Satin Dress",
+      description: "A sleek, body-hugging satin dress perfect for date nights or parties. Soft fabric and luxurious finish.",
+      price: 129.99,
+      category: "Fashion",
+      image: blackDress,
     },
     {
       id: 2,
-      title: "Smart Fitness Watch",
-      description: "Track your health and fitness with GPS, heart rate monitor, and sleep tracking.",
-      price: 199.99,
-      category: "Electronics"
+      title: "Chic Black Boots",
+      description: "Edgy and stylish, these black boots complement every outfit with attitude and class.",
+      price: 89.99,
+      category: "Footwear",
+      image: bootsBlack,
     },
     {
       id: 3,
-      title: "Organic Coffee Beans",
-      description: "Premium organic coffee beans from sustainable farms. Medium roast, 1lb bag.",
-      price: 24.99,
-      category: "Food"
+      title: "Royal Blue Flare Dress",
+      description: "Flattering sleeveless flare dress with rich blue hue. Perfect for semi-formal and casual outings.",
+      price: 109.99,
+      category: "Fashion",
+      image: blueDress,
     },
     {
       id: 4,
-      title: "Yoga Mat",
-      description: "Non-slip yoga mat made from eco-friendly materials. Perfect for home workouts.",
-      price: 39.99,
-      category: "Sports"
+      title: "Bold Maroon Satin Dress",
+      description: "Confidence meets elegance. This maroon satin dress hugs your curves and steals attention.",
+      price: 139.99,
+      category: "Fashion",
+      image: maroonDress,
     },
     {
       id: 5,
-      title: "LED Desk Lamp",
-      description: "Adjustable LED desk lamp with multiple brightness levels and USB charging port.",
-      price: 45.99,
-      category: "Home"
+      title: "Strappy Black Heels",
+      description: "Elegant black heels with a bold strappy design — height, comfort, and power combined.",
+      price: 74.99,
+      category: "Footwear",
+      image: blackHeels,
     },
     {
       id: 6,
-      title: "Stainless Steel Water Bottle",
-      description: "Insulated water bottle that keeps drinks cold for 24 hours or hot for 12 hours.",
-      price: 29.99,
-      category: "Sports"
+      title: "Glossy Black Crop Top",
+      description: "Satin-sheen crop top perfect for pairing with skirts, trousers, or layered jackets.",
+      price: 49.99,
+      category: "Tops",
+      image: blackTop,
+    },
+    {
+      id: 7,
+      title: "Dark Pink Pendant Necklace",
+      description: "Glam up with this beautiful heart pendant in pink. Great for gifting or adding shine to your look.",
+      price: 59.99,
+      category: "Accessories",
+      image: pendantPink,
+    },
+    {
+      id: 8,
+      title: "Stylish Black Handbag",
+      description: "A compact, rounded handbag with gold-chain strap. Chic and functional for daily use.",
+      price: 89.99,
+      category: "Bags",
+      image: blackBag,
     }
   ];
 
-  // Fetch products from API or use fallback
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -62,7 +91,6 @@ const ProductList = () => {
         setProducts(data);
         setFilteredProducts(data);
       } catch (error) {
-        console.log('API fetch failed, using fallback products');
         setProducts(fallbackProducts);
         setFilteredProducts(fallbackProducts);
       } finally {
@@ -73,7 +101,6 @@ const ProductList = () => {
     fetchProducts();
   }, []);
 
-  // Filter products based on search term
   useEffect(() => {
     const filtered = products.filter(product =>
       product.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -99,7 +126,6 @@ const ProductList = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
             <ShoppingBag className="h-8 w-8 text-blue-600 mr-2" />
@@ -108,7 +134,6 @@ const ProductList = () => {
           <p className="text-gray-600">Discover amazing products at great prices</p>
         </div>
 
-        {/* Search Bar */}
         <div className="max-w-md mx-auto mb-8">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -122,7 +147,6 @@ const ProductList = () => {
           </div>
         </div>
 
-        {/* Results Count */}
         <div className="mb-6">
           <p className="text-gray-600 text-center">
             {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''} found
@@ -130,7 +154,6 @@ const ProductList = () => {
           </p>
         </div>
 
-        {/* Products Grid */}
         {filteredProducts.length === 0 ? (
           <div className="text-center py-12">
             <div className="text-gray-400 mb-4">
